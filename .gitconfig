@@ -1,0 +1,70 @@
+[core]
+    editor = /usr/bin/vim
+    pager = less -x4
+[user]
+	name = Pete Houston
+	email = contact@petehouston.com
+[color]
+	ui = true
+    branch = auto
+    diff = auto
+    status = auto
+[color "branch"]
+    current = red reverse
+    local = blue
+    remote = green
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red bold
+    new = green
+    plain = white
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    ec = config --global -e
+    s = status
+    cm = commit -m
+    cma = commit -a -m
+    ca = commit --amend
+    amend = commit --amend
+    caa = commit -a --amend -C HEAD
+    le = log --oneline --decorate
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    filelog = log -u
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    lc  = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+    f = "!git ls-files | grep -i"
+    grep = grep -Ii
+    gr = grep -Ii
+    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    la = "!git config -l | grep alias | cut -c 7-"
+    lasttag = describe --tags --abbrev=0
+    lt = describe --tags --abbrev=0
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch 
+    diff = diff --word-diff
+    dc = diff --cached
+    lp = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr - %an)%Creset' --abbrev-commit --date=relative
+    rem="!git config -l | grep remote.*url | tail -n +2"
+    ours = "!f() { git co --ours $@ && git add $@; }; f"
+    theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    cob = checkout -b
+    save = !git add -A && git commit -m 'SAVEPOINT'
+    undo = reset HEAD~1 --mixed
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
